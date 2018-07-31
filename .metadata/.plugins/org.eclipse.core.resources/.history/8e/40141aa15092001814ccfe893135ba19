@@ -1,0 +1,36 @@
+package com.lara;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class M8 {
+	public static void main(String[] args) {
+		Configuration c1 = new Configuration();
+		c1.configure();
+
+		SessionFactory sf = c1.buildSessionFactory();
+		Session s1 = sf.openSession();
+
+		try (FileReader fin = new FileReader("data.txt");
+			 BufferedReader bin = new BufferedReader(fin))
+		{
+			Person p1 = null;
+			s1.beginTransaction();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		p1.setPersonId(101);
+		p1.setFirstName("vijay");
+		p1.setLastName("rao");
+
+		s1.save(p1);
+		s1.getTransaction().commit();
+
+		System.out.println("done");
+	}
+}
